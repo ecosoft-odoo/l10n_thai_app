@@ -1,0 +1,58 @@
+<h2 class="text-center">{{ filters.report_type == "sale" ? __("Sales VAT Report") : __("Purchase VAT Report")}}</h2>
+<h3 class="text-center">
+	{{ filters.company }}
+</h3>
+<h5 class="text-center">
+	{{ __("Tax ID: ") }} {{ data[0].company.tax_id }}
+	&nbsp;&nbsp;
+	{{ __("Branch ID: ") }} {{ "???" }}
+</h5>
+<h5 class="text-center">
+	{%= __("Year: ")%}	{%= filters.year %}
+	&nbsp;&nbsp;
+	{%= __("Month: ")%}	{%= filters.month %}
+</h5>
+<hr>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>{%= "#" %}</th>
+			<th>{%= __("Date") %}</th>
+			<th>{%= __("Number") %}</th>
+			<th>{%= __("Party") %}</th>
+			<th>{%= __("Tax ID") %}</th>
+			<th>{%= __("Branch ID") %}</th>
+			<th>{%= __("Base Amount") %}</th>
+			<th>{%= __("Tax Amount") %}</th>
+			<th>{%= __("Reference") %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for(var i=0, l=data.length; i<l; i++) { %}
+			<tr>
+				{% if(i == l-1) { %}
+				<td></td>
+				<td><b>{{__("Total")}}</b></td>
+				{% } else { %}
+				<td>{{ i+1 }}</td>
+				<td>{{ frappe.datetime.str_to_user(data[i].tax_invoice_date) }}</td>
+				{% } %}
+				<td>{{ data[i].tax_invoice_number }}</td>
+				<td>{{ data[i].party }}</td>
+				<td>{{ data[i].party_tax_id }}</td>
+				<td>{{ data[i].party_branch_id }}</td>
+				{% if(i == l-1) { %}
+				<td><b>{{ format_currency(data[i].tax_base) }}</b></td>
+				<td><b>{{ format_currency(data[i].tax_amount) }}</b></td>
+				{% } else { %}
+				<td>{{ format_currency(data[i].tax_base) }}</td>
+				<td>{{ format_currency(data[i].tax_amount) }}</td>
+				{% } %}
+				<td>{{ data[i].voucher_no }}</td>
+			</tr>
+		{% } %}
+
+
+	</tbody>
+</table>
+<p class="text-right text-muted">Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>

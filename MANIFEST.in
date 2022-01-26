@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include l10n_thai_app *.css
+recursive-include l10n_thai_app *.csv
+recursive-include l10n_thai_app *.html
+recursive-include l10n_thai_app *.ico
+recursive-include l10n_thai_app *.js
+recursive-include l10n_thai_app *.json
+recursive-include l10n_thai_app *.md
+recursive-include l10n_thai_app *.png
+recursive-include l10n_thai_app *.py
+recursive-include l10n_thai_app *.svg
+recursive-include l10n_thai_app *.txt
+recursive-exclude l10n_thai_app *.pyc
