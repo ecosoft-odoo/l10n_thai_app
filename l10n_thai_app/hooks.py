@@ -13,10 +13,6 @@ fixtures = [
     {
 		"dt": "Custom Field",
 		"filters": [("name", "in", [
-			"Issue-time_spent",
-			"Issue-project_name",
-			"Project-support_hours",
-			"Project-support_hours_used",
 			"Account-is_withholding_tax",
 		])],
 	},
@@ -24,21 +20,11 @@ fixtures = [
 		"dt": "DocType Link",
 		"filters": [["link_doctype", "in", ["Tax Invoice", "Withholding Tax Cert"]]],
 	},
-    {
-		"dt": "Project Type",
-		"filters": [["project_type", "in", ["Support Package"]]],
-	},
 	{
 		"dt": "Property Setter",
 		"filters": [["name", "in", [
-			"Issue-project-mandatory_depends_on",
-			"Issue-customer-reqd",
 			"Withholding Tax Cert-main-default_print_format",
 		]]],
-	},
-	{
-		"dt": "Client Script",
-		"filters": [["name", "in", ["Issue-Form"]]],
 	},
 ]
 
@@ -135,18 +121,21 @@ doctype_js = {
 # }
 
 doc_events = {
-	"Issue": {
-		"validate": "l10n_thai_app.l10n_thai_app.support.update_project_support_hours"
-	},
 	"Sales Invoice": {
-		"on_submit": "l10n_thai_app.l10n_thai_app.doctype.tax_invoice.tax_invoice.make_tax_invoice_on_invoice",
+		"on_submit": [
+			"l10n_thai_app.l10n_thai_app.doctype.tax_invoice.tax_invoice.make_tax_invoice_on_invoice",
+		],
 	},
 	"Purchase Invoice": {
-		"on_submit": "l10n_thai_app.l10n_thai_app.doctype.tax_invoice.tax_invoice.make_tax_invoice_on_invoice"
+		"on_submit": [
+			"l10n_thai_app.l10n_thai_app.doctype.tax_invoice.tax_invoice.make_tax_invoice_on_invoice",
+		],
 	},
 	"Payment Entry": {
-		"on_submit": "l10n_thai_app.l10n_thai_app.doctype.tax_invoice.tax_invoice.make_tax_invoice_on_payment",
-		"on_submit": "l10n_thai_app.l10n_thai_app.doctype.withholding_tax_cert.withholding_tax_cert.check_wht_cert",
+		"on_submit": [
+			"l10n_thai_app.l10n_thai_app.doctype.tax_invoice.tax_invoice.make_tax_invoice_on_payment",
+			"l10n_thai_app.l10n_thai_app.doctype.withholding_tax_cert.withholding_tax_cert.check_wht_cert",
+		],
 	},
 }
 
