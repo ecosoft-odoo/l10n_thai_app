@@ -120,7 +120,7 @@ def get_data(filters):
 @frappe.whitelist()
 def get_tax_years():
 	year_list = frappe.db.sql_list("""
-		select distinct YEAR(date) from `tabWithholding Items`
+		select distinct YEAR(date) from `tabWithholding Tax Cert`
 		where date is not null
 		ORDER BY YEAR(date) DESC
 	""")
