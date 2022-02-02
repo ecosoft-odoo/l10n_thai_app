@@ -5,12 +5,10 @@ import frappe
 from frappe import _
 from frappe.website.website_generator import WebsiteGenerator
 from erpnext.accounts.utils import get_account_currency
+from frappe.utils import add_months, get_last_day
 
 
 class TaxInvoice(WebsiteGenerator):
-
-    def on_submit(self):
-        self.validate_tax_invoice()
     
     def validate_tax_invoice(self):
         if not all([
@@ -18,6 +16,22 @@ class TaxInvoice(WebsiteGenerator):
             self.account, self.tax_base, self.tax_amount, self.voucher_type, self.voucher_no, self.company
         ]):
             frappe.throw(_("All fields are required before submission."))
+
+    def compute_report_date(self):
+        dt = self.tax_invoice_date
+        if dt:
+            dt = add_months(dt, int(self.months_delayed))
+            frappe.db.set_value(self.doctype, self.name, "report_date", get_last_day(dt))
+        else:
+            frappe.db.set_value(self.doctype, self.name, "report_date", False)
+        self.reload()
+
+    def on_submit(self):
+        self.validate_tax_invoice()
+        self.compute_report_date()
+
+    def on_update_after_submit(self):
+        self.compute_report_date()
 
 
 def make_tax_invoice(invoice, payment=None, alloc_percent=1):

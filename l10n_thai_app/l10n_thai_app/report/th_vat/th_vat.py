@@ -98,7 +98,7 @@ def get_data(filters):
 		"Tax Invoice",
 		filters={
 			"company": filters.company,
-			"tax_invoice_date": ["between", [date_from, date_to]],
+			"report_date": ["between", [date_from, date_to]],
 			"account": account,
 			"docstatus": ["in", ("1", "2")],  # submitted, cancelled
 		},
@@ -120,9 +120,9 @@ def get_data(filters):
 @frappe.whitelist()
 def get_tax_years():
 	year_list = frappe.db.sql_list("""
-		select distinct YEAR(tax_invoice_date) from `tabTax Invoice`
-		where tax_invoice_date is not null
-		ORDER BY YEAR(tax_invoice_date) DESC
+		select distinct YEAR(report_date) from `tabTax Invoice`
+		where report_date is not null
+		ORDER BY YEAR(report_date) DESC
 	""")
 	if not year_list:
 		year_list = [getdate().year]
