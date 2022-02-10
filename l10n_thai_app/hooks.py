@@ -24,6 +24,7 @@ fixtures = [
 		"dt": "Property Setter",
 		"filters": [["name", "in", [
 			"Withholding Tax Cert-main-default_print_format",
+			"Account-account_type-options",
 		]]],
 	},
 ]

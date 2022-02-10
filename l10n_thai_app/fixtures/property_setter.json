@@ -15,5 +15,22 @@
   "property_type": "Data",
   "row_name": null,
   "value": "Withholding Tax Cert"
+ },
+ {
+  "default_value": null,
+  "doc_type": "Account",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "account_type",
+  "modified": "2022-02-08 14:37:47.244208",
+  "name": "Account-account_type-options",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "options",
+  "property_type": "Text",
+  "row_name": null,
+  "value": "\nAccumulated Depreciation\nAsset Received But Not Billed\nBank\nCash\nChargeable\nCapital Work in Progress\nCost of Goods Sold\nDepreciation\nEquity\nExpense Account\nExpenses Included In Asset Valuation\nExpenses Included In Valuation\nFixed Asset\nIncome Account\nPayable\nReceivable\nRound Off\nStock\nStock Adjustment\nStock Received But Not Billed\nService Received But Not Billed\nTax\nTemporary\nCurrent Assets\nNon-current Assets\nCurrent Liabilities\nNon-current Liabilities"
  }
 ]
